@@ -1,9 +1,18 @@
-import React from 'react'
+import React from 'react';
+import Product from './components/Product';
+import Cart from './components/Cart';
+import './App.css'
 
-const App = () => {
+function App() {
+  const product = { id: 1, name: 'Product 1' };
+
   return (
-    <div className='text-4xl text-red-400'>App</div>
-  )
+    <div>
+      <h1>My Store</h1>
+      <Product product={product} />
+      <Cart />
+    </div>
+  );
 }
 
-export default App
+export default App;

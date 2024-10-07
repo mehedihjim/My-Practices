@@ -1,0 +1,24 @@
+/* src/components/Cart.css */
+
+.cart-container {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cart-items {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cart-item {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
