@@ -1,6 +1,11 @@
 "use client";
 
 import { useGetProductsQuery } from "@/redux/productApi";
+import { motion } from "motion/react";
+
+export function Component({ isVisible }) {
+  return <motion.div animate={{ opacity: isVisible ? 1 : 0 }} />;
+}
 
 export default function Home() {
   const { data, error, isLoading } = useGetProductsQuery();
@@ -10,7 +15,16 @@ export default function Home() {
 
   return (
     <main style={{ padding: "2rem" }}>
-      <h1>🛍 Product List</h1>
+      <motion.div
+        whileHover={{
+          y: -100,
+          rotate: [-5, 5, -5, 5, 0],
+        }}
+        transition={{ duration: 1 }}
+        style={{ fontSize: "3rem", display: "inline-block" }}
+      >
+        <h1 className="text-white">🛍 Product List</h1>
+      </motion.div>
       <table style={{ borderCollapse: "collapse", width: "100%" }}>
         <thead>
           <tr>
