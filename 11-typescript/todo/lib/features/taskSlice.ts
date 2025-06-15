@@ -18,7 +18,14 @@ const initialState: TaskState = {
 export const taskSlice = createSlice({
   name: "tasks",
   initialState,
-  reducers: {},
+  reducers: {
+    addTask(state, action) {},
+    deleteTask(state, action) {},
+    toggleTask(state, action) {},
+  },
 });
 
+console.log(taskSlice.actions);
+
+export const { addTask, deleteTask, toggleTask } = taskSlice.actions;
 export default taskSlice.reducer;
