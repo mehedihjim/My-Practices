@@ -1,8 +1,10 @@
 "use client";
 import RecipeDetailSkeleton from "@/components/ui/RecipeDetailsSkeleton";
+import { toggleFavorite } from "@/lib/features/recipeSlice";
 import { Recipe } from "@/lib/types/recipe";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 type RecipeDetailProps = {
   params: { id: string };
@@ -16,6 +18,18 @@ export default function RecipeDetail({ params }: RecipeDetailProps) {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const dispatch = useDispatch();
+
+  const addFavorite = () => {
+    setIsFavorite(!isFavorite);
+    dispatch(toggleFavorite(recipe!));
+    if (!isFavorite) {
+      alert("Recipe added to favorites!");
+    } else {
+      alert("Recipe removed from favorites!");
+    }
+  };
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -120,10 +134,15 @@ export default function RecipeDetail({ params }: RecipeDetailProps) {
           </div>
 
           {/* Favorite Button */}
-          <button className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50">
+          <button
+            onClick={addFavorite}
+            className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-gray-400 hover:text-red-500"
+              className={`"h-6 w-6 text-gray-400 hover:text-red-500" ${
+                isFavorite ? "text-red-500" : "text-gray-400"
+              }`}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
