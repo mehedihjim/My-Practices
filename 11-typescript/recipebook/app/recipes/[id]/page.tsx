@@ -3,8 +3,9 @@ import RecipeDetailSkeleton from "@/components/ui/RecipeDetailsSkeleton";
 import { toggleFavorite } from "@/lib/features/recipeSlice";
 import { Recipe } from "@/lib/types/recipe";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 type RecipeDetailProps = {
   params: { id: string };
@@ -18,16 +19,17 @@ export default function RecipeDetail({ params }: RecipeDetailProps) {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isFavorite, setIsFavorite] = useState(false);
   const dispatch = useDispatch();
+  const favoriteRecipes = useSelector(
+    (state: any) => state.recipes.favoriteRecipes
+  );
 
   const addFavorite = () => {
-    setIsFavorite(!isFavorite);
     dispatch(toggleFavorite(recipe!));
-    if (!isFavorite) {
-      alert("Recipe added to favorites!");
+    if (isFavorite) {
+      toast.info("Removed from favorites");
     } else {
-      alert("Recipe removed from favorites!");
+      toast.success("Added to favorites!");
     }
   };
 
@@ -53,6 +55,8 @@ export default function RecipeDetail({ params }: RecipeDetailProps) {
   if (loading) return <RecipeDetailSkeleton />;
   if (error) return <div>Error: {error}</div>;
   if (!recipe) return <div>No recipe found</div>;
+
+  const isFavorite = favoriteRecipes.some((r: any) => r.id === recipe?.id);
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
@@ -87,7 +91,7 @@ export default function RecipeDetail({ params }: RecipeDetailProps) {
 
             {/* Recipe Title */}
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              {recipe.name}
+              {recipe.title}
             </h1>
 
             {/* Meta Info */}
@@ -162,7 +166,7 @@ export default function RecipeDetail({ params }: RecipeDetailProps) {
       <div className="rounded-xl overflow-hidden shadow-lg mb-8">
         <img
           src={recipe.image}
-          alt={recipe.name}
+          alt={recipe.title}
           className="w-full h-96 object-cover"
         />
       </div>
