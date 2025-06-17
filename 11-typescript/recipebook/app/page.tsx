@@ -79,11 +79,11 @@ const Page = () => {
               pageCount={pageCount}
               onPageChange={handlePageClick}
               containerClassName="flex space-x-2 text-gray-700"
-              pageClassName="cursor-pointer px-3 py-1 rounded border border-gray-300 hover:bg-emerald-100"
+              pageClassName="cursor-pointer px-3 py-1 rounded border border-gray-300 hover:bg-gray-300"
               pageLinkClassName=""
-              previousClassName="cursor-pointer px-3 py-1 rounded border border-gray-300 hover:bg-emerald-100"
-              nextClassName="cursor-pointer px-3 py-1 rounded border border-gray-300 hover:bg-emerald-100"
-              activeClassName="bg-emerald-500 text-white border-emerald-500"
+              previousClassName="cursor-pointer px-3 py-1 rounded border border-gray-300 hover:bg-gray-300"
+              nextClassName="cursor-pointer px-3 py-1 rounded border border-gray-300 hover:bg-gray-300"
+              activeClassName="bg-black text-white border-black"
               disabledClassName="opacity-50 cursor-not-allowed"
               breakLabel={"..."}
               breakClassName="px-3 py-1"
