@@ -4,12 +4,7 @@ import RecipeCard from "@/components/ui/RecipeCard";
 import RecipeCardSkeleton from "@/components/ui/RecipeSkeleton";
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/navigation";
-
-interface Recipe {
-  id: number;
-  name: string;
-  image: string;
-}
+import { Recipe } from "@/lib/types/recipe";
 
 interface RecipesResponse {
   recipes: Recipe[];
@@ -58,10 +53,9 @@ const Page = () => {
 
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          <RecipeCardSkeleton />
-          <RecipeCardSkeleton />
-          <RecipeCardSkeleton />
-          <RecipeCardSkeleton />
+          {Array.from({ length: 12 }).map((_, idx) => (
+            <RecipeCardSkeleton key={idx} />
+          ))}
         </div>
       ) : recipes.length === 0 ? (
         <p className="text-center text-gray-500">No recipes found.</p>
@@ -71,9 +65,7 @@ const Page = () => {
             {currentRecipes.map((recipe) => (
               <RecipeCard
                 key={recipe.id}
-                id={recipe.id}
-                title={recipe.name}
-                imageUrl={recipe.image}
+                recipe={recipe}
                 onViewDetails={() => router.push(`/recipes/${recipe.id}`)}
               />
             ))}

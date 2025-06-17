@@ -25,9 +25,7 @@ const page = () => {
             {favoriteRecipes.map((recipe: any) => (
               <RecipeCard
                 key={recipe.id}
-                id={recipe.id}
-                title={recipe.name}
-                imageUrl={recipe.image}
+                recipe={recipe}
                 onViewDetails={() => router.push(`/recipes/${recipe.id}`)}
               />
             ))}

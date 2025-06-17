@@ -3,7 +3,7 @@ import RecipeDetailSkeleton from "@/components/ui/RecipeDetailsSkeleton";
 import { toggleFavorite } from "@/lib/features/recipeSlice";
 import { Recipe } from "@/lib/types/recipe";
 import { useRouter } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -13,7 +13,8 @@ type RecipeDetailProps = {
 
 export default function RecipeDetail({ params }: RecipeDetailProps) {
   const router = useRouter();
-  const { id } = params;
+  // const { id } = params;
+  const { id } = (params as any).then ? use(params as any) : params;
 
   // In a client component, you would typically use useEffect and useState for data fetching
   const [recipe, setRecipe] = useState<Recipe | null>(null);
@@ -27,9 +28,31 @@ export default function RecipeDetail({ params }: RecipeDetailProps) {
   const addFavorite = () => {
     dispatch(toggleFavorite(recipe!));
     if (isFavorite) {
-      toast.info("Removed from favorites");
+      toast.info("Removed from favorites", {
+        autoClose: 1000, // close after 1.5 seconds
+        hideProgressBar: true, // hide progress bar
+        pauseOnHover: false, // don't pause on hover
+        closeOnClick: true,
+        draggable: false,
+        style: {
+          fontSize: "0.8rem",
+          padding: "8px 12px",
+          minWidth: "200px",
+        },
+      });
     } else {
-      toast.success("Added to favorites!");
+      toast.success("Added to favorites!", {
+        autoClose: 1000,
+        hideProgressBar: true,
+        pauseOnHover: false,
+        closeOnClick: true,
+        draggable: false,
+        style: {
+          fontSize: "0.8rem",
+          padding: "8px 12px",
+          minWidth: "200px",
+        },
+      });
     }
   };
 
@@ -89,9 +112,9 @@ export default function RecipeDetail({ params }: RecipeDetailProps) {
               {recipe.cuisine}
             </span>
 
-            {/* Recipe Title */}
+            {/* Recipe name */}
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              {recipe.title}
+              {recipe.name}
             </h1>
 
             {/* Meta Info */}
@@ -166,7 +189,7 @@ export default function RecipeDetail({ params }: RecipeDetailProps) {
       <div className="rounded-xl overflow-hidden shadow-lg mb-8">
         <img
           src={recipe.image}
-          alt={recipe.title}
+          alt={recipe.name}
           className="w-full h-96 object-cover"
         />
       </div>
