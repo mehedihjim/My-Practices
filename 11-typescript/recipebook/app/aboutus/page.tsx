@@ -9,6 +9,13 @@ const AboutPage = () => {
         <h1 className="text-4xl font-extrabold text-gray-800 mb-6 tracking-tight">
           About FlavorVault
         </h1>
+        <a href="https://app.daily.dev/mhjim" className="mb-6">
+          <img
+            src="https://api.daily.dev/devcards/v2/Mg8wu8vIUDnHG6nAh9THK.png?type=wide&r=hdw"
+            width="652"
+            alt="Mehedi Hasan Jim's Dev Card"
+          />
+        </a>
         <p className="text-lg text-gray-700 leading-relaxed">
           Welcome to <span className="font-bold">FlavorVault</span> — your go-to
           destination for discovering, collecting, and organizing recipes that
