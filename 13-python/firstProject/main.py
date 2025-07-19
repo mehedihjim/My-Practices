@@ -1,19 +1,21 @@
-#This is probably not my first python program/file- but I'm starting again
+#mini madlib game with python
 
-name = input("What's your name?: ")
-age = 23
-food = 'Pizza'
-isProgrammer = input("Are you a Programmer? (yes/no): ").strip().lower()
+print("Welcome to Mad Libs! Fill in the blanks below:")
 
+# Take user inputs
+name = input("Enter a name: ")
+place = input("Enter a place: ")
+animal = input("Enter an animal: ")
+verb = input("Enter a verb (past tense): ")
+adjective = input("Enter an adjective: ")
+food = input("Enter your favorite food: ")
 
-if isProgrammer == 'yes':
-    print(f"Hi, I'm {name}, a {age} years old programmer- who loves eating {food}") #updated version
-else:
-    print('I am', name, 'I love pizza' )
+# The funny story
+story = f"""
+Once upon a time, {name} went to {place} with a pet {animal}.
+They {verb} all day long and felt very {adjective}.
+At the end of the day, they ate some delicious {food} and lived happily ever after!
+"""
 
-# Shopping Cart
-item = input("What you want to buy?: ")
-price= float(input("You can choose the price by yourself: "))
-quantity= int(input("How many do you want?: "))
-
-print(f"You have bought {quantity} {item}s, and the total is ${price * quantity}")
+print("\nHere's your Mad Lib story:\n")
+print(story)
